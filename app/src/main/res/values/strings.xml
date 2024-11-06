@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PronotesPluquet</string>
+    <string name="evalutaion_button_text">Evaluations</string>
+    <string name="evaluation_title">x</string>
+</resources>
