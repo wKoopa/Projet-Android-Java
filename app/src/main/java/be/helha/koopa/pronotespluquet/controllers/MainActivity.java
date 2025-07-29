@@ -1,23 +1,12 @@
 package be.helha.koopa.pronotespluquet.controllers;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import be.helha.koopa.pronotespluquet.R;
-import be.helha.koopa.pronotespluquet.views.CourseFragment;
+import be.helha.koopa.pronotespluquet.views.BlockFragment;
+import be.helha.koopa.pronotespluquet.views.StudentFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -25,10 +14,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Add the CourseFragment to the activity
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        // Ajoute les deux onglets
+        tabLayout.addTab(tabLayout.newTab().setText("Bloc"));
+        tabLayout.addTab(tabLayout.newTab().setText("Élèves"));
+
+        // Affiche BlocFragment par défaut
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, new CourseFragment())
+                .replace(R.id.fragment_container, new BlockFragment())
+                .commit();
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Fragment fragment;
+                if (tab.getPosition() == 0) {
+                    fragment = new BlockFragment();
+                } else {
+                    fragment = new StudentFragment();
+                }
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .commit();
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+    }
+
+    // Navigation vers les cours d’un bloc (inchangé)
+    public void openCoursesForBlock(long blockId, String blockName) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, be.helha.koopa.pronotespluquet.views.CourseFragment.newInstance(blockId, blockName))
+                .addToBackStack(null)
                 .commit();
     }
 }

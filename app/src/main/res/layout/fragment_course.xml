@@ -5,17 +5,36 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retour"/>
+
+        <TextView
+            android:id="@+id/textViewBlockTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cours de"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
     <EditText
         android:id="@+id/editTextCourseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Course Name" />
-
-    <EditText
-        android:id="@+id/editTextBlock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Block (e.g. BA1)" />
 
     <Button
         android:id="@+id/buttonAddCourse"
@@ -27,5 +46,8 @@
         android:id="@+id/textViewCourses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Courses will appear here" />
+        android:text="Courses will appear here"
+        android:layout_marginTop="16dp"
+        android:textSize="22sp" />
+
 </LinearLayout>
